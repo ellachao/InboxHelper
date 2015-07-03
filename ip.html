@@ -1,0 +1,116 @@
+<head>
+  <title>Inbox Analyzer</title>
+</head>
+
+<body>
+    <div class="navbar navbar-inverse" role="navigation">
+		<div class="navbar-header">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a class="navbar-brand logo" id="home">
+                        <!--<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>--> 
+                        Inbox Analyzer
+                    </a>
+                </li>
+            </ul>
+		</div>
+		<div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                {{#if currentUser}}
+                <li><a id="from">From</a></li>
+                <li><a id="to">To</a></li>
+                {{/if}}
+                
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a>{{> loginButtons}}</a></li>
+            </ul>
+		</div>
+	</div>
+    {{#if currentUser}}
+        {{#if homePage}}{{> home}}{{/if}}
+        {{#if fromPage}}{{> from}}{{/if}}
+        {{#if toPage}}{{> to}}{{/if}}
+    {{else}}
+        {{> home}}
+     {{/if}}
+    
+   
+
+</body>
+
+<template name="home">
+    <div id='main'>
+    <h1>Welcome to Inbox Analyzer!</h1>
+    <p>Whether at work, at school, or at home, we spend a lot of time reading
+       and sending emails. Do you ever wonder who send you the most emails?
+       Or are the emails you receive being sent directly to you, or to a group
+       that you are part of?
+    </p>
+    <p>This application allows you to explore your inbox on a deeper level.
+       You will be able to see visualizations of your inbox after logging into
+       the system.
+    </p>
+    <p>By granting this application access to your gmail, your emails will be parsed 
+       and stored in a database. Don't worry, the actual contents of the emails will not 
+       be stored. The only information that will be store by this applicaion is the sender, 
+       the receiver of an email, and the date it is received.
+    </p>
+    </div>
+</template>
+<template name="from">
+    <h2>Top 10 People Who Email You Most Frequently</h2>
+    {{> pie}}
+    <h2>Email Sent From:</h2>
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <td>Sent From</td>
+                <td>Number of Emails</td>
+            </tr>
+        </thead>
+        <tbody>
+			{{#each parsedFrom}}
+			<tr>
+				<td style="width: 50%;">{{name}}</td>
+                <td style="width: 30%;">{{count}}</td>
+				
+			</tr>
+			{{/each}}
+        </tbody>
+        </table>
+    </div>
+</template>
+<template name="pie">
+    <svg id="fromPie"> 
+    </svg>
+</template>
+<template name="to">
+    <h2>Top 10 Receivers of Emails You Got</h2>
+    {{> secondPie}}
+    <h2>Email Sent To:</h2>
+    <div class="col-md-10 col-md-offset-1">
+        <table class="table table-striped table-hover" id="toTable">
+        <thead>
+            <tr>
+                <td>Sent To</td>
+                <td>Number of Emails</td>
+            </tr>
+        </thead>
+        <tbody>
+			{{#each parsedTo}}
+			<tr>
+				<td style="width: 50%;">{{name}}</td>
+                <td style="width: 30%;">{{count}}</td>
+				
+			</tr>
+			{{/each}}
+        </tbody>
+        </table>
+    </div>
+</template>
+<template name="secondPie">
+    <svg id="toPie"> 
+    </svg>
+</template>

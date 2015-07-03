@@ -1,0 +1,33 @@
+/* CSS declarations go here */
+.navbar-inverse {
+    border-radius: 0 !important;
+}
+.slice text {
+    font-size: 8px;
+}
+
+.legend {                                                  
+        font-size: 14px;
+}
+
+#fromPie, #toPie {
+    display: block;
+    margin: 0 auto;
+    height: 650px;
+    width: 1100px;
+}
+#toTable td {
+    max-width: 200px !important;
+}
+
+#main {
+    width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+    font-size: 20px;
+}
+
+h2,h1 {
+    text-align: center;
+    margin: 20px;
+}
